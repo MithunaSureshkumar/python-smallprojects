@@ -1,0 +1,57 @@
+
+                                                         LIBRARY MANAGEMENT SYSTEM
+
+
+
+class Library():
+    def __init__(self, list):
+        self.books_list = list
+        self.available = list
+        self.books_lent = {}    #key-book  value-username
+    def display_ava_books(self):
+        for book in self.available:
+            print(book)
+
+    def display_all_books(self):
+        for book in self.books_list:
+            print(book)
+    def lent_books(self,name,book):
+        if book not in self.books_list:
+            print("incorrect book name .Check the book list")
+            return
+        if book in self.available:
+            self.books_lent.update({book:name})
+            self.available.remove(book)
+            print("you can take the list...")
+        else:
+            print("the book is already taken "+self.books_lent[book])
+    def return_books(self):
+        del self.books_lent[book]
+        self.available.append(book)
+
+if __name__ =="__main__":
+    lib = Library(["the pacific ocean", "the atlanca", "the marvel", "the little dancer", "the cargo war"])
+    print("Welcome to our library..select any option.")
+    while True:
+       print("1.Display available books")
+       print("2.Display all books")
+       print("3.Borrow a book")
+       print("4.Return a book")
+       print("5.Quit")
+       user_choice=int(input())
+       if user_choice==1:
+          lib.display_ava_books()
+       elif user_choice==2:
+          lib.display_all_books()
+       elif user_choice==3:
+        name = input("enter user name: ")
+        book = input("enter book name: ")
+        lib.lent_books(name,book)
+       elif user_choice==4:
+        book=input("enter the name of book")
+        lib.return_books(book)
+       elif user_choice==5:
+        break
+       else:
+        print("invalid choice")
+
